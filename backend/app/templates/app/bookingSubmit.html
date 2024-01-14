@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Submit</title>
+</head>
+<body>
+
+  <h1>Booking Submit</h1>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="post" action="{% url 'bookingSubmit' %}">
+    {% csrf_token %}
+
+    <label for="time">Select a time:</label>
+    <select name="time" id="time">
+      <option value="" selected disabled>Select a time</option>
+      <!-- Populate options dynamically based on available times -->
+      {% for t in times %}
+        <option value="{{ t }}">{{ t }}</option>
+      {% endfor %}
+    </select>
+
+    <br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

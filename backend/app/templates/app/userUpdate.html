@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Update</title>
+</head>
+<body>
+
+  <h1>User Update</h1>
+
+  <form method="post" action="{% url 'userUpdate' id=id %}">
+    {% csrf_token %}
+
+    <label for="service">Select a service:</label>
+    <select name="service" id="service">
+      <option value="" selected disabled>Select a service</option>
+      <!-- Populate options dynamically based on your services or use 'validateWeekdays' if applicable -->
+      {% for weekday in validateWeekdays %}
+        <option value="{{ weekday }}">{{ weekday }}</option>
+      {% endfor %}
+    </select>
+
+    <br>
+
+    <label for="day">Select a day:</label>
+    <select name="day" id="day">
+      <option value="" selected disabled>Select a day</option>
+      <!-- Populate options dynamically based on your valid weekdays -->
+      {% for weekday in validateWeekdays %}
+        <option value="{{ weekday }}">{{ weekday }}</option>
+      {% endfor %}
+    </select>
+
+    <br>
+
+    <button type="submit">Update</button>
+  </form>
+
+  <p>
+    {% if delta24 %}
+      You can update your appointment within the next 24 hours.
+    {% else %}
+      You can only update your appointment at least 24 hours before the scheduled time.
+    {% endif %}
+  </p>
+
+</body>
+</html>

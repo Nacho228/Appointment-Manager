@@ -42,13 +42,14 @@
 
     <br>
 
-    <!-- <label for="time">Seleccione una hora:</label>
+    <label for="time">Seleccione una hora:</label>
     <select name="time" id="time">
       <option  value="" selected disabled>Hora</option>
       {% for time in times %}
-        <option value="{{ time }}"></option>
+        <option value="{{ time }}">{{ time }}</option>
       {% endfor %}
-    </select> -->
+    </select>
+    
     <button type="submit">Submit</button>
   </form>
 

@@ -1,7 +1,7 @@
 from django import forms
-from app.models import LogMessage
+from .models import Appointment
 
-class LogMessageForm(forms.ModelForm):
+class UpdateAppointmentForm(forms.ModelForm):
     class Meta:
-        model = LogMessage
-        fields = ("message",)   # NOTE: the trailing comma is required
+        model = Appointment
+        fields = ['service', 'day', 'time']

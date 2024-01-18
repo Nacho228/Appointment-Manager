@@ -4,6 +4,9 @@
 }
 
 .navbar {
+    display: flex;
+    text-align: center;
+    justify-content: center;
     background-color: lightslategray;
     font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -27,6 +30,9 @@
 }
 
 .body-content {
+    display: flex;
+    text-align: center;
+    justify-content: center;
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

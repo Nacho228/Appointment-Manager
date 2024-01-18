@@ -1,0 +1,22 @@
+{% extends "app/layout.html" %}
+{% block title %}
+<h1> Update appointment</h1>
+{% endblock %}
+{% block content %}
+
+  <form method="post" action="{% url 'update_appointment' appointment.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="update">Update</button>
+    <button type="submit" name="delete">Delete</button>
+  </form>
+  <a href="{% url 'my_appointments' %}">Back to My Appointments</a>
+
+
+  {% if delta24 %}
+  You can update your appointment within the next 24 hours.
+  {% else %}
+  You can only update your appointment at least 24 hours before the scheduled time.
+  {% endif %}
+  </p>
+{% endblock %}

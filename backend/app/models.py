@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.models import User
 
@@ -30,4 +29,7 @@ class Appointment(models.Model):
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self) -> str:
-        return f"{self.user.username} | day: {self.day} | time: {self.time}" 
+        if self.user:
+            return f"{self.user.username} | day: {self.day} | time: {self.time}"
+        else:
+            return f"No user | day: {self.day} | time: {self.time}" 

@@ -3,16 +3,13 @@
 <title>Home</title>
 {% endblock %}
 {% block content %}
-<h2>Appointments</h2>
+<h2>Welcome to our home page!</h2>
+<h3>This project is for educational propuses, try to book</h3>
+
 <form method="post" action="{% url 'booking' %}" style="display: inline;">
     {% csrf_token %}
     <button type="submit">Make an appointment</button>
 </form>
-<form method="post" action="{% url 'register' %}" style="display: inline;">
-    {% csrf_token %}
-    <button type="submit">Register</button>
-</form>
-
 <div id="root"></div>
 
 {% if message_list %}

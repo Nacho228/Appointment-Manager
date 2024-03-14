@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, timedelta
 from .models import *
@@ -15,7 +16,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('booking')  # Redirect to booking page after registration
+            return redirect('booking')
     else:
         form = SignUpForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -23,8 +24,8 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
 def checkTime(times, day, service):
-    #Only show the time of the day and the service that has not been selected before:
     x = []
     for k in times:
         if Appointment.objects.filter(day=day, time=k, service=service).count() < 1:
@@ -32,13 +33,11 @@ def checkTime(times, day, service):
     return x
 
 def home(request):
-    return render(request, 'app/home.html')
+    success_message = messages.get_messages(request)
+    return render(request, 'app/home.html', {'success_message': success_message})
 
 def about(request):
     return render(request, 'app/about.html')
-
-def contact(request):
-    return render(request, 'app/contact.html')
 
 @login_required
 def booking(request):
@@ -78,20 +77,16 @@ def booking(request):
                             time=time,
                         )
                         appointment_id = appointment.id
-                        messages.success(request, 'Cita guardada con éxito.')
-                        return redirect('home')
+                        messages.success(request, 'Appointment booked successfully')
+                        return redirect(reverse('home') + '?success_message=Appointment booked successfully')
                     else:
-                        messages.success(request, "The Selected Day Is Full!")
-                        messages.success(request, "La hora seleccionada ya está reservada.")
+                        messages.success(request, "The desired time is already taken")
                 else:
                     messages.success(request, "The Selected Date Is Incorrect")
-                    messages.success(request, "El día seleccionado está completo.")
             else:
                     messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
-                    messages.success(request, "La fecha seleccionada es incorrecta.")
         else:
             messages.success(request, "Please Select A Service!")
-            messages.success(request, "La fecha seleccionada no está en el período correcto.")
 
     return render(request, 'app/booking.html', {
             'weekdays': weekdays,
@@ -114,12 +109,12 @@ def update_appointment(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id, user=request.user)
     if request.method == 'POST':
         if 'update' in request.POST:
-            form = UpdateAppointmentForm(request.POST, instance=appointment)
-            if form.is_valid():
-                form.save()
+            update_form = UpdateAppointmentForm(request.POST, instance=appointment)
+            if update_form.is_valid():
+                update_form.save()
+                return redirect('my_appointments')
         elif 'delete' in request.POST:
             appointment.delete()
-
         return redirect('my_appointments')
     else:
         form = UpdateAppointmentForm(instance=appointment)
@@ -130,7 +125,6 @@ def dayToWeekday(x):
     return x.strftime('%A')
 
 def validWeekday(days):
-    # Loop days you want in the next 21 days
     today = datetime.now()
     weekdays = []
     for i in range(0, days):

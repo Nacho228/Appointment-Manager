@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from datetime import datetime
 from django.contrib.auth.models import User
 
@@ -33,3 +34,4 @@ class Appointment(models.Model):
             return f"{self.user.username} | day: {self.day} | time: {self.time}"
         else:
             return f"No user | day: {self.day} | time: {self.time}" 
+ 

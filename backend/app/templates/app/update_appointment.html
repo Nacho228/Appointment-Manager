@@ -3,20 +3,23 @@
 <h1> Update appointment</h1>
 {% endblock %}
 {% block content %}
-
+<div class="update-container">
+  <h2> Update your appointments</h2>
   <form method="post" action="{% url 'update_appointment' appointment.id %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" name="update">Update</button>
-    <button type="submit" name="delete">Delete</button>
+    <div class="button-container">
+      <button class="button3" type="submit" name="update">Update</button>
+      <button class="button3" type="submit" name="delete">Delete</button>
+    </div>
   </form>
-  <a href="{% url 'my_appointments' %}">Back to My Appointments</a>
+  <a style="margin-top: 20px;" href="{% url 'my_appointments' %}">Back to My Appointments</a>
+</div>
 
-
-  {% if delta24 %}
-  You can update your appointment within the next 24 hours.
-  {% else %}
-  You can only update your appointment at least 24 hours before the scheduled time.
-  {% endif %}
-  </p>
+{% if delta24 %}
+You can update your appointment within the next 24 hours.
+{% else %}
+You can only update your appointment at least 24 hours before the scheduled time.
+{% endif %}
+</p>
 {% endblock %}

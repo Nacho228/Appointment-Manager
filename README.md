@@ -1,20 +1,37 @@
-This is intended to be an appointment website for educational propuses.
+# Appointment Manager
+ This project is a simple web application developed using Django, HTML, and CSS. Its main purpose is to demonstrate skills in Python programming with Django framework.
 
-Features needed:
-Work hours setted.
-Notifications.
-All services are able to book.
-Mobile responsive.
-Payment options.
-Canceling and rescheduling.
+## Features
+User authentication system.
+Creation, listing, updating, and deletion of appointments.
+Basic HTML and CSS for front-end presentation.
 
-Data to store:
-User information (name, gender, age)
-Appointment details (place, time, who is gonna attend you)
+## Installation
 
-Defining roles:
-The user can: Log in and log out, manage his profile, book an appointment and view and cancel appointments.
-The admin can: manage users, including creating new accounts, updating user information, and potentially deactivating or removing accounts if needed. Also he can manage appointments. And update appointments details, such as time, place or personal.
+To run this project locally, follow these steps:
 
-Tech Stack:
-Django for Backend, MySQL for storing information and React js for front-end.
+### Clone the repository to your local machine:
+
+git clone <repository_url>
+
+### Navigate to the project directory:
+
+cd appointment_manager
+
+### Install the required dependencies using pip:
+
+pip install -r requirements.txt
+
+### Apply migrations to set up the database:
+
+python manage.py migrate
+
+### Start the development server:
+
+python manage.py runserver
+
+### Access the application in your web browser at http://localhost:8000.
+
+## Usage
+Register an account or log in if you already have one.
+Once logged in, you can create new appointments, view your existing appointments, update them, or delete them.

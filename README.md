@@ -12,23 +12,23 @@ To run this project locally, follow these steps:
 
 ### Clone the repository to your local machine:
 
-git clone <repository_url>
+`git clone <repository_url>`
 
 ### Navigate to the project directory:
 
-cd appointment_manager
+`cd appointment_manager`
 
 ### Install the required dependencies using pip:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 ### Apply migrations to set up the database:
 
-python manage.py migrate
+`python manage.py migrate`
 
 ### Start the development server:
 
-python manage.py runserver
+`python manage.py runserver`
 
 ### Access the application in your web browser at http://localhost:8000.
 

@@ -16,7 +16,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('booking')
+            return redirect(reverse('booking'))
     else:
         form = SignUpForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -26,11 +26,10 @@ def logout_view(request):
     return redirect('home')
 
 def checkTime(times, day, service):
-    x = []
-    for k in times:
-        if Appointment.objects.filter(day=day, time=k, service=service).count() < 1:
-            x.append(k)
-    return x
+    booked_times = Appointment.objects.filter(day=day, service=service).values_list('time', flat=True)
+    available_times = [time for time in times if time not in booked_times]
+    return available_times
+
 
 def home(request):
     success_message = messages.get_messages(request)

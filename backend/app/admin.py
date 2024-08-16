@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import *
-admin.site.register(Appointment)
+from .models import Appointment
 
-# Register your models here.
+@admin  .register(Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'service', 'day', 'time')
+    search_fields = ('user__username', 'service')
+    list_filter = ('service', 'day')

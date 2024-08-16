@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import Header from './components/header';
+import Services from './components/services';
+import Times from './components/times';
+import Button from './components/button';
+import Appointments from './components/appointments';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div style={styles.container}>
+            <Header />
+            <div style={styles.mainContent}>
+                <Services />
+                <Times />
+            </div>
+            <Button text="Book" />
+            <Appointments />
+        </div>
+    );
 }
+
+const styles = {
+    container: {
+        fontFamily: 'Arial, sans-serif',
+        maxWidth: '800px',
+        margin: '0 auto',
+        padding: '20px',
+    },
+    mainContent: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    }
+};
 
 export default App;
